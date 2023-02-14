@@ -1,20 +1,15 @@
+require("dotenv").config();
+
+
 const express = require('express');
 const mysql = require("mysql");
 const app = express();
 
+const pool = require("./config/database.js");
+
 app.get('/cars', (req, res) => {
-  const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    port: 3306,
-    database: 'taxi6'
-  });
-
-  connection.connect();
-
   const sql = 'SELECT * FROM cars';
-  connection.query(sql, (error, results, fields)=>{
+  pool.query(sql, (error, results, fields)=>{
     if (error) {
         console.log(error);
         return;
@@ -22,11 +17,9 @@ app.get('/cars', (req, res) => {
     res.send(results);
   })
 
-  connection.end();
-
 });
 
-app.listen(3000, ()=>{
-    console.log("Data server, listen port: 3000");
+app.listen(process.env.APP_PORT, ()=>{
+    console.log(`Data server, listen port: ${process.env.APP_PORT}`);
 })
   

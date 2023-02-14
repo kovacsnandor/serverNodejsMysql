@@ -27,6 +27,13 @@ Azokat nem verziózza, amit ebbe fájlba írunk
 ## request.rest létrehozás
 a `request.rest` fájllal pingeljük a szervert
 
+# connect mysql
+
+# connect, .env
+A .env fájlba kirakjuk a kapcsolódáshoz és egyebekhez szükséges paramétereket.
+
+Ennek elérésehz új csomag szükséges: 'dotenv'
+
 
 
 
