@@ -25,6 +25,33 @@ app.get("/cars", (req, res) => {
   });
 });
 
+app.get("/cars/:id",(req, res)=>{
+  const id = req.params.id;
+  pool.getConnection(function (error, connection) {
+    if (error) {
+      console.log("szerver hiba");
+      return;
+    }
+  //   const sql = `
+  //   SELECT * FROM cars
+  // WHERE id = ${id}
+  //   `;
+  const sql = `
+    SELECT * FROM cars
+  WHERE id = ?
+  `;
+    connection.query(sql, [id], (error, results, fields) => {
+      if (error) {
+        console.log("sql hiba");
+        return;
+      }
+      res.send(results[0]);
+    });
+    connection.release();
+  });
+});
+
+
 app.listen(process.env.APP_PORT, () => {
   console.log(`Data server, listen port: ${process.env.APP_PORT}`);
 });

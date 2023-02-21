@@ -62,7 +62,7 @@ INSERT users
   VALUES
   (1, 'x@gmail.com', 'xjeszó'), (2, 'y@gmail.com', 'yjeszó'),(3, 'z@gmail.com', 'zjeszó');
 
-SELECT * FROM cars;
+SELECT xxx FROM cars;
 SELECT * FROM trips;
 SELECT * FROM users;
 
@@ -113,3 +113,9 @@ call genDin(25, '2022.11.12 12:00:00', 2,10);
 
 # véletlen vezetéknév
 select genVez();
+
+
+SELECT * FROM cars
+  WHERE id = 12;
+
+select * from users;

