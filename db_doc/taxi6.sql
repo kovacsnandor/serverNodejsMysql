@@ -62,7 +62,7 @@ INSERT users
   VALUES
   (1, 'x@gmail.com', 'xjeszó'), (2, 'y@gmail.com', 'yjeszó'),(3, 'z@gmail.com', 'zjeszó');
 
-SELECT xxx FROM cars;
+SELECT * FROM cars;
 SELECT * FROM trips;
 SELECT * FROM users;
 
@@ -119,3 +119,45 @@ SELECT * FROM cars
   WHERE id = 12;
 
 select * from users;
+
+# -------------------
+# sql injection
+
+# union, union all
+SELECT * FROM cars
+UNION
+SELECT * FROM cars;
+
+SELECT * FROM cars
+UNION ALL
+SELECT * FROM cars;
+
+SELECT name FROM cars
+UNION
+SELECT email FROM users;
+
+SELECT * FROM cars WHERE id = 2 UNION SELECT *, '' FROM users;
+
+# információk az adatbázisról
+# mi az adatbázis neve
+SELECT database();
+
+SELECT * FROM cars WHERE id = 2 UNION SELECT database(), '','','';
+
+# milyen táblák vannak
+select table_name from information_schema.tables where table_schema='taxi6';
+
+SELECT * FROM cars WHERE id = 2 UNION select table_name, '','','' from information_schema.tables where table_schema='taxi6';
+
+
+# a tábla oszlopai, típusai
+select column_name, data_type from information_schema.columns where table_name='users' and table_schema='taxi6';
+SELECT * FROM cars WHERE id = 2 UNION select column_name,'', '','' from information_schema.columns where table_name='users' and table_schema='taxi6';
+
+# CRUD mûveletek
+# Create: post (http), insert (sql)
+# új autó
+INSERT INTO cars
+  (name, licenceNumber, hourlyRate)
+  VALUES
+  ('trabant', 'tt123', 20000);

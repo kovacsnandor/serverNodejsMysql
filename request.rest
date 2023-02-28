@@ -4,7 +4,7 @@ get http://localhost:3000/cars
 
 
 ### get car by id
-get http://localhost:3000/cars/12
+get http://localhost:3000/cars/1002
 
 
 ### sql injections
@@ -20,3 +20,25 @@ get http://localhost:3000/cars/222  UNION select table_name, '','','' from infor
 ### get milyen oszlopai vannak a users táblának
 get http://localhost:3000/cars/222 UNION select column_name,'', '','' from information_schema.columns where table_name='users' and table_schema='taxi6'
 
+### post car
+post http://localhost:3000/cars
+Content-Type: application/json
+
+{
+    "name": "Trabant",
+    "licenceNumber": "TT809",
+    "hourlyRate": 20036
+}
+
+### delete car by id
+delete http://localhost:3000/cars/1004
+
+### put car
+put http://localhost:3000/cars/1002
+Content-Type: application/json
+
+{
+    "name": "Trabant2",
+    "licenceNumber": "TT809",
+    "hourlyRate": 20036
+}
