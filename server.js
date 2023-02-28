@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const mysql = require("mysql");
 const app = express();
+const sanitizeHtml = require("sanitize-html");
 
 const pool = require("./config/database.js");
 
@@ -58,9 +59,9 @@ app.get("/cars/:id", (req, res) => {
 app.post("/cars", (req, res) => {
   console.log(req.body);
   const newR = {
-    name: req.body.name,
-    licenceNumber: req.body.licenceNumber,
-    hourlyRate: req.body.hourlyRate,
+    name: mySanitizeHtml(req.body.name),
+    licenceNumber: mySanitizeHtml(req.body.licenceNumber),
+    hourlyRate: +mySanitizeHtml(req.body.hourlyRate),
   };
 
   pool.getConnection(function (error, connection) {
@@ -98,9 +99,9 @@ app.post("/cars", (req, res) => {
 app.put("/cars/:id", (req, res) => {
   const id = req.params.id;
   const newR = {
-    name: req.body.name,
-    licenceNumber: req.body.licenceNumber,
-    hourlyRate: req.body.hourlyRate,
+    name: mySanitizeHtml(req.body.name),
+    licenceNumber: mySanitizeHtml(req.body.licenceNumber),
+    hourlyRate: +mySanitizeHtml(req.body.hourlyRate),
   };
   pool.getConnection(function (error, connection) {
     if (error) {
@@ -163,6 +164,13 @@ app.delete("/cars/:id", (req, res) => {
 });
 
 //#endregion cars
+
+function mySanitizeHtml(data) {
+  return sanitizeHtml(data, {
+    allowedTags: [],
+    allowedAttributes: {},
+  });
+}
 
 app.listen(process.env.APP_PORT, () => {
   console.log(`Data server, listen port: ${process.env.APP_PORT}`);
