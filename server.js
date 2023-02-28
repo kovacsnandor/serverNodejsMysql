@@ -15,16 +15,30 @@ app.use(express.json());
 app.get("/cars", (req, res) => {
   pool.getConnection(function (error, connection) {
     if (error) {
-      console.log("szerver hiba");
+      res.send({
+        success: 0,
+        message: "szerver error",
+        data: []
+      });
       return;
     }
-    const sql = "SELECT * FROM cars";
+    const sql = "SELECT * vvv FROM cars";
     connection.query(sql, (error, results, fields) => {
       if (error) {
-        console.log("sql hiba");
+        res.send({
+          success: 0,
+          message: "sql error",
+          data: []
+        });
+  
         return;
       }
-      res.send(results);
+      res.send({
+        success: 1,
+        message: "ok",
+        data: results
+      });
+
     });
     connection.release();
   });
