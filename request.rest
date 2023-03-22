@@ -4,7 +4,7 @@ get http://localhost:3000/cars
 
 
 ### get car by id
-get http://localhost:3000/cars/1002
+get http://localhost:3000/cars/10022
 
 
 ### sql injections
@@ -27,11 +27,11 @@ Content-Type: application/json
 {
     "name": "Trabant <h2>valami</h2>",
     "licenceNumber": "TT809",
-    "hourlyRate": 20036
+    "hourlyRate": "20036 éélkjéklj"
 }
 
 ### delete car by id
-delete http://localhost:3000/cars/1004
+delete http://localhost:3000/cars/1002
 
 ### put car
 put http://localhost:3000/cars/1002
@@ -42,3 +42,9 @@ Content-Type: application/json
     "licenceNumber": "TT809",
     "hourlyRate": 20036
 }
+
+
+###
+### get all trips
+get http://localhost:3000/trips
+

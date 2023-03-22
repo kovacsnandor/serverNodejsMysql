@@ -161,3 +161,17 @@ INSERT INTO cars
   (name, licenceNumber, hourlyRate)
   VALUES
   ('trabant', 'tt123', 20000);
+
+# törlés
+DELETE from cars
+  WHERE id = 1003;
+
+# módosítás: put
+UPDATE cars SET
+  name = 'cc',
+  licenceNumber = 'vvv',
+  hourlyRate = 1
+  WHERE id = 1002;
+
+select t1.name, t2.name from cars t1, cars t2
+ORDER by t1.name;
